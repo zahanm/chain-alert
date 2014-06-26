@@ -1,0 +1,18 @@
+{
+  "name": "chain-alert",
+  "version": "0.0.1",
+  "description": "Alerts from chainlove.com",
+  "main": "ping.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zahanm/chain-alert.git"
+  },
+  "author": "Zahan Malkani <z@zahanm.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/zahanm/chain-alert/issues"
+  }
+}
