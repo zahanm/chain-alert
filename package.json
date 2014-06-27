@@ -14,5 +14,8 @@
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/zahanm/chain-alert/issues"
+  },
+  "dependencies": {
+    "zombie": "~2.0.0-alpha31"
   }
 }
