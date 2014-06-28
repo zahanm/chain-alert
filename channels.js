@@ -1,8 +1,9 @@
 
 'use strict';
 
-var nodemailer = require('nodemailer');
 var fs = require('promised-io/fs');
+var path = require('path');
+var nodemailer = require('nodemailer');
 
 var invariant = require('./invariant');
 
@@ -19,7 +20,7 @@ function sendEmail(to, subject, body) {
     /.+@.+\..+/.test(to.address), // stupidly simple validation
     'Invalid email address provided'
   );
-  fs.readFile('./blob.json')
+  fs.readFile(path.join(path.dirname(module.filename), 'blob.json'))
   .then(function(buf) {
     var from = JSON.parse(buf).from;
     invariant(

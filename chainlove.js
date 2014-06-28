@@ -5,6 +5,7 @@ var Browser = require('zombie');
 var Promise = require('node-promise').Promise;
 
 var fs = require('promised-io/fs');
+var path = require('path');
 
 var invariant = require('./invariant');
 
@@ -57,7 +58,7 @@ var ChainLove = {
 
   doesMatchInterests: function(deal) {
     var promise = new Promise();
-    fs.readFile('./blob.json')
+    fs.readFile(path.join(path.dirname(module.filename), './blob.json'))
     .then(function(buf) {
       var results = JSON.parse(buf).searches.map(function(search) {
         invariant(

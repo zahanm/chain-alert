@@ -1,5 +1,6 @@
 
 var fs = require('promised-io/fs');
+var path = require('path');
 var util = require('util');
 
 var ChainLove = require('./chainlove.js');
@@ -18,7 +19,7 @@ ChainLove.fetchCurrentDeal()
       var recipient = search.recipient;
       var body = search.alerttext;
       invariant(recipient && body, 'Need recipient and deal label.');
-      fs.readFile('./blob.json')
+      fs.readFile(path.join(path.dirname(module.filename), 'blob.json'))
       .then(function(buf) {
         var recipients = JSON.parse(buf).recipients;
         invariant(
