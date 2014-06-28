@@ -1,6 +1,8 @@
 
 'use strict';
 
+var util = require('util');
+
 module.exports = function() {
   var args = Array.prototype.slice.call(arguments, 0);
   var condition = args.shift();

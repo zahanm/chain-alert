@@ -6,27 +6,39 @@ var Channels = require('./channels.js');
 
 var invariant = require('./invariant.js');
 
-if (false) {
-  ChainLove.fetchCurrentDeal()
-  .then(function(deal) {
-    console.log(deal);
+ChainLove.fetchCurrentDeal()
+.then(ChainLove.doesMatchInterests)
+.then(function(results) {
+  results.forEach(function(result) {
+    if (result) {
+      var deal = result.deal;
+      var search = result.search;
+      invariant(deal && search, 'Need deal and search info.');
+      var recipient = search.recipient;
+      var body = search.alerttext;
+      invariant(recipient && body, 'Need recipient and deal label.');
+      fs.readFile('./blob.json')
+      .then(function(buf) {
+        var recipients = JSON.parse(buf).recipients;
+        invariant(
+          recipients[recipient],
+          'Your recipient %s is not present in the recipients store',
+          recipient
+        );
+        var r = recipients[recipient];
+        switch(r.type) {
+          case 'SMS':
+            Channels.sendSMS(r, body);
+            break;
+          case 'email':
+            Channels.sendEmail(r, 'Chainlove deal match!', body);
+            break;
+          default:
+            invariant(false, 'Invalid type provided');
+        }
+      });
+    } else {
+      console.log('Bummer, the current deal does not match');
+    }
   });
-} else {
-  fs.readFile('./blob.json')
-  .then(function(buf) {
-    var data = JSON.parse(buf);
-    data.recipients.forEach(function(r) {
-      switch(r.type) {
-        case 'SMS':
-          Channels.sendSMS(r, 'hello out there');
-          break;
-        case 'email':
-          Channels.sendEmail(r, 'test', 'hello out there');
-          break;
-        default:
-          invariant(false, 'Invalid type provided');
-      }
-    });
-    // data.searches
-  });
-}
+});

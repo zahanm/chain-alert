@@ -16,7 +16,7 @@ var ATT_SMS_GATEWAY = 'txt.att.net';
  */
 function sendEmail(to, subject, body) {
   invariant(
-    /.+@.+\..+/.exec(to.address), // stupidly simple validation
+    /.+@.+\..+/.test(to.address), // stupidly simple validation
     'Invalid email address provided'
   );
   fs.readFile('./blob.json')
@@ -25,6 +25,11 @@ function sendEmail(to, subject, body) {
     invariant(
       from.service && from.user && from.pass,
       'You need a service, user and pass specified'
+    );
+    invariant(
+      from.service === 'Gmail' || from.service === 'Yahoo',
+      'Only commonly used services are supported for now, not %s',
+      from.service
     );
     // email setup
     var gmailSMTP = nodemailer.createTransport('SMTP', {
@@ -43,7 +48,6 @@ function sendEmail(to, subject, body) {
     };
     gmailSMTP.sendMail(mail, function(err, resp) {
       invariant(!err, 'Error in sending message %s', err);
-      console.log("Message sent: " + resp.message);
       gmailSMTP.close();
     });
   });
@@ -65,7 +69,7 @@ function sendSMS(to, body) {
     to.carrier
   );
   invariant(
-    /^\d{10}$/.exec(to.number),
+    /^\d{10}$/.test(to.number),
     '%s is not a valid phone number',
     to.number
   );
