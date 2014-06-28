@@ -1,5 +1,6 @@
 
 var fs = require('promised-io/fs');
+var util = require('util');
 
 var ChainLove = require('./chainlove.js');
 var Channels = require('./channels.js');
@@ -26,7 +27,7 @@ ChainLove.fetchCurrentDeal()
           recipient
         );
         var r = recipients[recipient];
-        console.log('Sending an alert about %s to %s', body, to);
+        util.log(util.format('Sending an alert about %s to %j', body, to));
         switch(r.type) {
           case 'SMS':
             Channels.sendSMS(r, body);
@@ -38,8 +39,6 @@ ChainLove.fetchCurrentDeal()
             invariant(false, 'Invalid type provided');
         }
       });
-    } else {
-      console.log('Bummer, the current deal does not match');
     }
   });
 });
