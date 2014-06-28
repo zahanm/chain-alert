@@ -1,3 +1,10 @@
+## Custom for this project
+
+/*.json
+!/sample.json
+
+## Github picked these
+
 # Logs
 logs
 *.log

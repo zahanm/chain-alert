@@ -33,7 +33,7 @@ var Channels = {
       to.number
     );
     var sms_gateway = to.number + '@' + ATT_SMS_GATEWAY;
-    console.log('Sending ', body, ' to ', sms_gateway);
+    console.log('Sending', '"' + body + '"', 'to', sms_gateway);
   }
 
 };
