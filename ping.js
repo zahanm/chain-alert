@@ -28,7 +28,7 @@ ChainLove.fetchCurrentDeal()
           recipient
         );
         var r = recipients[recipient];
-        util.log(util.format('Sending an alert about %s to %j', body, to));
+        util.log(util.format('Sending an alert about %s to %j', body, r));
         switch(r.type) {
           case 'SMS':
             Channels.sendSMS(r, body);

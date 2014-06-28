@@ -79,6 +79,10 @@ var ChainLove = {
             // quick optimization to not check if one query already didn't match
             return false;
           }
+          if (!search[field]) {
+            // nothing to search for here
+            return true;
+          }
           invariant(
             search[field].reduce,
             'Query needs to be an array %s',
