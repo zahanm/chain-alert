@@ -4,19 +4,21 @@
     "user": "foo.bar@mail.com",
     "pass": "baz"
   },
-  "recipients": [
-    {
+  "recipients": {
+    "111phone": {
       "type": "SMS",
       "carrier": "AT&T",
       "number": "6501112222"
     },
-    {
+    "bazemail": {
       "type": "email",
       "address": "baz.bur@mail.com"
     }
-  ],
+  },
   "searches": [
     {
+      "alerttext": "Name of alert",
+      "recipient": "bazemail",
       "title": ["some", "terms", "here"],
       "description": ["more", "terms"],
       "use": ["still", "more"]
