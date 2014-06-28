@@ -18,6 +18,7 @@
   "dependencies": {
     "zombie": "~2.0.0-alpha31",
     "node-promise": "~0.5.10",
-    "promised-io": "~0.3.4"
+    "promised-io": "~0.3.4",
+    "nodemailer": "~0.7.0"
   }
 }

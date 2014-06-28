@@ -16,9 +16,17 @@ if (false) {
   .then(function(buf) {
     var data = JSON.parse(buf);
     data.recipients.forEach(function(r) {
-      Channels.sendSMS(r, 'hello out there');
+      switch(r.type) {
+        case 'SMS':
+          Channels.sendSMS(r, 'hello out there');
+          break;
+        case 'email':
+          Channels.sendEmail(r, 'test', 'hello out there');
+          break;
+        default:
+          invariant(false, 'Invalid type provided');
+      }
     });
     // data.searches
-    // Channels.sendSMS()
   });
 }

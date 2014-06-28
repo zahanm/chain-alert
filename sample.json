@@ -1,8 +1,18 @@
 {
+  "from": {
+    "service": "Mailer",
+    "user": "foo.bar@mail.com",
+    "pass": "baz"
+  },
   "recipients": [
     {
+      "type": "SMS",
       "carrier": "AT&T",
       "number": "6501112222"
+    },
+    {
+      "type": "email",
+      "address": "baz.bur@mail.com"
     }
   ],
   "searches": [
