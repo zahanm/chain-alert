@@ -2,6 +2,7 @@
 'use strict';
 
 var Browser = require('zombie');
+var Promise = require('node-promise').Promise;
 
 var invariant = require('./invariant');
 
@@ -19,13 +20,14 @@ var ChainLove = {
    *   use: '..',
    * }
    */
-  fetchCurrentDeal: function(callback) {
+  fetchCurrentDeal: function() {
+    var promise = new Promise();
     Browser.visit(
       CHAINLOVE_DOT_COM,
       { debug: false, runScripts: false },
       function(err, browser) {
         if (err) {
-          callback(err);
+          promise.emitError(err);
           return;
         }
         var feature_pairs = browser.queryAll(SELECTOR_USE);
@@ -44,9 +46,10 @@ var ChainLove = {
           description: browser.text(SELECTOR_DESCRIPTION),
           use: use
         };
-        callback(null, deal);
+        promise.emitSuccess(deal);
       }
     );
+    return promise;
   }
 
 };

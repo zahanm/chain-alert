@@ -16,6 +16,8 @@
     "url": "https://github.com/zahanm/chain-alert/issues"
   },
   "dependencies": {
-    "zombie": "~2.0.0-alpha31"
+    "zombie": "~2.0.0-alpha31",
+    "node-promise": "~0.5.10",
+    "promised-io": "~0.3.4"
   }
 }
